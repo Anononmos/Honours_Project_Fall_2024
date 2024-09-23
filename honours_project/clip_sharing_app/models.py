@@ -9,10 +9,17 @@ class Video(models.Model):
 
     title = models.CharField(max_length=50, blank=True, null=True, help_text='Enter a title for the video.')
     views = models.PositiveIntegerField(default=0, help_text='View count of the video.')
-    uploadDate = models.DateTimeField(auto_now_add=True, help_text='Upload date for the video.')
+    uploaded = models.DateTimeField(auto_now_add=True, help_text='Upload date for the video.')
+
+    def display_title(self):
+        """Create a string containing a video's title."""
+
+        return self.title
+    
+    display_title.short_description = 'Title'
 
     def __str__(self) -> str:
-        return f'Title: {self.title}\nUploaded: {self.uploadDate}\n {self.views} views.'
+        return f'Title: {self.title}\nUploaded: {self.uploaded}\n {self.views} views.'
 
 
 class VideoInstance(models.Model):
