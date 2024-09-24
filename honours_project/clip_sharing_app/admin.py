@@ -8,8 +8,8 @@ from .models import Video, VideoInstance
 
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):
-    list_display = ('title', 'views', 'uploaded')
+    list_display = ('id', 'expires', 'uploaded', 'title', 'views')
 
 @admin.register(VideoInstance)
 class VideoInstanceAdmin(admin.ModelAdmin):
-    list_display = ('display_title', 'id', 'expires')
+    list_display = ('get_id', 'get_expiry', 'get_uploaded', 'get_title', 'get_views')
