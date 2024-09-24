@@ -1,4 +1,6 @@
+import os
 from django.db import models
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 
@@ -10,13 +12,6 @@ class Video(models.Model):
     title = models.CharField(max_length=50, blank=True, null=True, help_text='Enter a title for the video.')
     views = models.PositiveIntegerField(default=0, help_text='View count of the video.')
     uploaded = models.DateTimeField(auto_now_add=True, help_text='Upload date for the video.')
-
-    def display_title(self):
-        """Create a string containing a video's title."""
-
-        return self.title
-    
-    display_title.short_description = 'Title'
 
     def __str__(self) -> str:
         return f'Title: {self.title}\nUploaded: {self.uploaded}\n {self.views} views.'
@@ -30,5 +25,40 @@ class VideoInstance(models.Model):
     video = models.OneToOneField(Video, on_delete=models.CASCADE)
     file = models.FileField(upload_to="uploads/")
 
+    def delete(self):
+        """Deletes the uploaded file when the instance is deleted."""
+
+        self.file.delete()
+        super(VideoInstance, self).delete()
+
+        return
+
+    def display_title(self):
+        """Create a string containing a video's title."""
+
+        return self.video.title
+    
+    display_title.short_description = 'Title'
+
     def __str__(self) -> str:
         return f'Id: {self.id}\nInfo: ({self.video})'
+    
+# File delete functions
+
+def _delete_file(path):
+    """Deletes file from filesystem"""
+
+    if os.path.isfile(path):
+        os.remove(path)
+
+    return
+
+
+@receiver(models.signals.post_delete, sender=VideoInstance)
+def delete_file(sender, instance, *args, **kwargs):
+    """Deletes associated video file when VideoInstance object is deleted."""
+
+    if instance.file: 
+        _delete_file(instance.file.path)
+
+    return
