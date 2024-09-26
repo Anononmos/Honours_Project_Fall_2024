@@ -1,0 +1,17 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <div class="container-fluid outer">
+        <form action="">
+            <label for="file-select">
+                <span>Choose Clip</span>
+            </label>
+            <input id="file-select" type="file" accept="video/*" name="file" hidden >
+            <input id="file-upload" type="submit" value="Upload" hidden>
+        </form>
+    </div>
+    <div class="container error">
+        <img src="{% static 'images/error_icon.png' %}" alt="Error Icon">
+        <span></span>
+    </div>
+{% endblock %}
