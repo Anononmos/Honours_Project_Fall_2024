@@ -1,17 +1,23 @@
-{% extends "base_generic.html" %}
+{% extends "base.html" %}
 
 {% block content %}
-    <div class="container-fluid outer">
-        <form action="">
-            <label for="file-select">
-                <span>Choose Clip</span>
-            </label>
-            <input id="file-select" type="file" accept="video/*" name="file" hidden >
-            <input id="file-upload" type="submit" value="Upload" hidden>
+    <div class="outer">
+        <form method="post" enctype="multipart/form-data">
+            <div>
+                <label for="file-select">
+                    <span>Choose Clip</span>
+                </label>
+                <input id="file-select" type="file" accept="video/*" name="file" hidden>
+                <input id="file-upload" type="submit" value="Upload" hidden>
+            </div>
+            <input type="text" id="title-upload" name="title" placeholder="Enter a title">
         </form>
     </div>
-    <div class="container error">
+    <div class="error">
+        {% load static %}
         <img src="{% static 'images/error_icon.png' %}" alt="Error Icon">
         <span></span>
     </div>
+    {% load static %}
+    <script src="{% static 'scripts/upload.js' %}"></script>
 {% endblock %}

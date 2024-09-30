@@ -5,7 +5,7 @@ from django.shortcuts import render
 def index(request):
     """Homepage view function."""
 
-    return render(request, 'base_generic.html')
+    return render(request, 'index.html')
 
 def watch(request):
     video_id = request.GET.get('v', None)

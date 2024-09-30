@@ -3,3 +3,6 @@
 
 # Database
 *.sqlite3
+
+# JavaScript intellisense config
+jsconfig.json
