@@ -6,8 +6,10 @@ body, html {
 .wrapper {
     height: inherit;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
 }
 
 .outer {
@@ -82,6 +84,10 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+input[type="submit"]:hover {
+    background-color: #6BFFB8;
+}
+
 input[type="text"] {
     max-width: 100%;
     height: 1.5rem;
@@ -123,7 +129,30 @@ input[type="text"]:focus {
     text-align: center;
     vertical-align: middle;
     color: #C4462D;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-family: sans-serif;
     font-weight: bold;
+}
+
+.header > h1 {
+    font-size: 2em;
+    font-family: "Trebuchet MS", sans-serif;
+    color: #9CAFB7;
+}
+
+.header h2 {
+    padding: 0;
+    margin: 1rem;
+    
+    font-size: 1rem;
+    font-family: "Helvetica", sans-serif;
+    font-weight: light;
+    color: #9CAFB7;
+}
+
+.header li {
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: "Gill Sans", serif;
+    color: #2D3047;
 }
