@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="header">
+        <h1>To Upload:</h1>
+        <ol>
+            <li><h2>Select a video file. (At most 60 seconds in duration and 50MB in filesize).</h2></li>
+            <li><h2>Write in an optional title.</h2></li>
+            <li><h2>Upload.</h2></li>
+        </ol>
+    </div>
     <div class="outer">
-        <form method="post" enctype="multipart/form-data">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
             <div>
                 <label for="file-select">
                     <span>Choose Clip</span>
