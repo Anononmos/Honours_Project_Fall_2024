@@ -7,6 +7,7 @@ const SIZE_LIMIT = 50
 // Displays error message
 
 const display_error = (message) => {
+    $('input[type="submit"]').hide()
     $('.outer').css('border-color', ERR_COLOUR)
     $('.error>span').text(message)
     $('.error').show()
@@ -66,7 +67,7 @@ $('input[type="file"]').on('change', async event => {
         var video = await load_video(event.currentTarget.files[0])
         
     } catch (error) {
-        display_error(error.message)
+        display_error(error)
 
         return
     }

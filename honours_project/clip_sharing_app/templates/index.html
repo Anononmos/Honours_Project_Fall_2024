@@ -2,24 +2,32 @@
 
 {% block content %}
     <div class="header">
-        <h1>To Upload:</h1>
+        <h1 class="title">To Upload:</h1>
         <ol>
-            <li><h2>Select a video file. (At most 60 seconds in duration and 50MB in filesize).</h2></li>
-            <li><h2>Write in an optional title.</h2></li>
-            <li><h2>Upload.</h2></li>
+            <li class="number">
+                <h2 class="paragraph">Select a video file. (At most 60 seconds in duration and 50MB in filesize).</h2>
+            </li>
+            <li class="number">
+                <h2 class="paragraph">Write in an optional title.</h2>
+            </li>
+            <li class="number">
+                <h2 class="paragraph">Upload.</h2>
+            </li>
         </ol>
     </div>
     <div class="outer">
         <form action="" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div>
-                <label for="file-select">
+                <label for="{{ form.file.id_for_label }}">
                     <span>Choose Clip</span>
                 </label>
-                <input id="file-select" type="file" accept="video/*" name="file" hidden>
+                {{ form.file }}
+                <!-- <input id="file-select" type="file" accept="video/*" name="file" hidden> -->
                 <input id="file-upload" type="submit" value="Upload" hidden>
             </div>
-            <input type="text" id="title-upload" name="title" placeholder="Enter a title">
+            {{ form.title }}
+            <!-- <input type="text" id="title-upload" name="title" placeholder="Enter a title"> -->
         </form>
     </div>
     <div class="error">

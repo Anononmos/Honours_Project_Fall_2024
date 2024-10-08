@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/error.css' %}">
+    <div class="error">
+        {% load static %}
+        <img src="{% static 'images/error_icon.png' %}" alt="Error Icon">
+        <span>{{ message }}</span>
+    </div>
+    <a href="{% url 'index' %}">Back to Upload.</a>
+{% endblock content %}
+    
