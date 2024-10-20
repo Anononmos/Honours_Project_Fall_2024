@@ -14,6 +14,7 @@ const display_error = (message) => {
 }
 
 // Gets duration of video file
+// Loads video in unrendered HTML video element
 
 const load_video = (file) => new Promise( 
     (resolve, reject) => {

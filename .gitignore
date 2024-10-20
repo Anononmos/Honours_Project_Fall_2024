@@ -6,3 +6,11 @@
 
 # JavaScript intellisense config
 jsconfig.json
+
+# Environment Variables
+.env
+
+# Upload folder and temp folder
+
+uploads
+tmp
