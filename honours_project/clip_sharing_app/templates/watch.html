@@ -2,12 +2,12 @@
 
 {% block content %}
 <div class="video outer">
-    <h1 class="title"></h1>
-    <video src="" controls muted>
+    <h1 class="title">{{ title }}</h1>
+    <video width="480" controls muted>
 
     </video>
     <h2 class="paragraph">
-        <span class="number"></span> Views
+        <span class="number">{{ views }}</span> Views
     </h2>
 </div>
 <div class="error page">
@@ -16,5 +16,5 @@
     <span></span>
 </div>
 {% load static %}
-<script src="{% static 'scripts/watch.js' %}"></script>
-{% endblock %}
+<script id="client" src="{% static 'scripts/watch.js' %}" data-url="{{ url }}" defer></script>
+{% endblock %} 

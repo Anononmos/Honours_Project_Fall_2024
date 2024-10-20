@@ -1,5 +1,9 @@
+:root {
+    --bg-colour: #D25137;
+}
+
 html, body {
-    background-color: #D25137;
+    background-color: var(--bg-colour);
 }
 
 .error > span {

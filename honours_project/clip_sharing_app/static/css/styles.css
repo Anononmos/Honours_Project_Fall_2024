@@ -1,7 +1,17 @@
+:root {
+    --button-hover-colour: #6BFFB8;
+    --button-bg-colour: #36D382;
+    --container-border-colour: #C2C2C2;
+    --textfield-hover-colour: #7CFEF0;
+    --error-text-colour: #C4462D;
+    --text-colour: #9CAFB7;
+    --number-colour: #2D3047;
+}
+
 body, html {
     width: 100%;
     height: 100%;
-    background-color: #EFF2F1;
+    background-color: white;
 }
 
 .wrapper {
@@ -17,7 +27,7 @@ body, html {
     width: fit-content;
     height: fit-content;
     padding: 5rem;
-    border: solid #C2C2C2 2px;
+    border: solid var(--container-border-colour) 2px;
     border-radius: 0.3rem;
 }
 
@@ -55,7 +65,7 @@ label[for="file-select"] {
     padding: 0.5rem;
     border-radius: 0.3rem;
     
-    background-color: #36D382;
+    background-color: var(--button-bg-colour);
     color: white;
     font-family: sans-serif;
     font-size: 1.5rem;
@@ -65,7 +75,7 @@ label[for="file-select"] {
 }
 
 label[for="file-select"]:hover {
-    background-color: #6BFFB8;
+    background-color: var(--button-hover-colour);
 }
 
 input[type="submit"] {
@@ -76,7 +86,7 @@ input[type="submit"] {
     border-radius: 0.3rem;
     border-width: 0;
 
-    background-color: #36D382;
+    background-color: var(--button-bg-colour);
     color: white;
     font-family: sans-serif;
     font-size: 1.5rem;
@@ -86,7 +96,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #6BFFB8;
+    background-color: var(--button-hover-colour);
 }
 
 input[type="text"] {
@@ -103,16 +113,21 @@ input[type="text"] {
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-color: #C2C2C2;
+    border-color: var(--container-border-colour);
 }
 
 input[type="text"]:hover {
-    border-bottom-color: #7CFEF0;
+    border-bottom-color: var(--textfield-hover-colour);
 }
 
 input[type="text"]:focus {
     outline: none;
-    border-bottom-color: #7CFEF0;
+    border-bottom-color: var(--textfield-hover-colour);
+}
+
+video {
+    border: solid 2px var(--container-border-colour);
+    border-radius: 0.3rem;
 }
 
 .error {
@@ -129,7 +144,7 @@ input[type="text"]:focus {
 .error > span {
     text-align: center;
     vertical-align: middle;
-    color: #C4462D;
+    color: var(--error-text-colour);
     font-size: 1.5rem;
     font-family: sans-serif;
     font-weight: bold;
@@ -138,7 +153,7 @@ input[type="text"]:focus {
 .title {
     font-size: 2em;
     font-family: "Trebuchet MS", sans-serif;
-    color: #9CAFB7;
+    color: var(--text-colour);
 }
 
 .paragraph {
@@ -148,12 +163,12 @@ input[type="text"]:focus {
     font-size: 1rem;
     font-family: "Helvetica", sans-serif;
     font-weight: light;
-    color: #9CAFB7;
+    color: var(--text-colour);
 }
 
 .number {
     font-size: 1rem;
     font-weight: bold;
     font-family: "Gill Sans", serif;
-    color: #2D3047;
+    color: var(--number-colour);
 }
