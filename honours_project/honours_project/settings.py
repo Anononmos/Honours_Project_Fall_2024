@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles', 
     # Add application
-    'clip_sharing_app.apps.ClipSharingAppConfig'
+    'clip_sharing_app.apps.ClipSharingAppConfig', 
 ]
 
 MIDDLEWARE = [
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'clip_sharing_app.middleware.VideoViewMiddleware', 
 ]
 
 ROOT_URLCONF = 'honours_project.urls'

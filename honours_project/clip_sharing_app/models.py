@@ -4,7 +4,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils import timezone
-from datetime import datetime, timedelta
+from datetime import timedelta
 
 # Create your models here.
 
@@ -44,7 +44,7 @@ class Video(models.Model):
 
     views = models.PositiveIntegerField( 
         default=0, 
-        help_text='View count of the video.' 
+        help_text='Share count of the video.' 
     )
 
     def save(self, *args, **kwargs):
@@ -96,7 +96,7 @@ class VideoInstance(models.Model):
     get_expiry.short_description = 'Expiry Date'
     get_uploaded.short_description = 'Upload Date'
     get_title.short_description = 'Title'
-    get_views.short_description = 'Viewcount'
+    get_views.short_description = 'View Count'
 
     def __str__(self) -> str:
         return f'VideoInstance, filename: {self.file.name}, info: {self.video}'
