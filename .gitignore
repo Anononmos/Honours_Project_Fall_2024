@@ -16,4 +16,4 @@ uploads
 tmp
 
 # Test input files
-test_files
+honours_project/clip_sharing_app/tests/test_files
