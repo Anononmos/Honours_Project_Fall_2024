@@ -48,6 +48,12 @@ class Video(models.Model):
     )
 
     def save(self, *args, **kwargs):
+        """
+        Saves the video object to the database. 
+        Creates 6-character alphanumeric id for the database entry. 
+        Creates an expiration date 10 minutes after upload.
+        """
+
         if not self.id:
             self.id = get_random_string(length=6)
 
@@ -61,7 +67,7 @@ class Video(models.Model):
 
 
 class VideoInstance(models.Model):
-    """Includes video file and access code."""
+    """Includes video file and video info as separate object."""
 
     video = models.OneToOneField(Video, on_delete=models.CASCADE)
     file = models.FileField(upload_to=upload_to)
