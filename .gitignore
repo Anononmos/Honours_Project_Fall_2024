@@ -14,6 +14,3 @@ jsconfig.json
 
 uploads
 tmp
-
-# Test input files
-honours_project/clip_sharing_app/tests/test_files
