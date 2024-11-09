@@ -55,3 +55,4 @@ class VideoModelTest(TestCase):
 
 class VideoInstanceModelTest(TestCase):
     ...
+    

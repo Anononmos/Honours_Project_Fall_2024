@@ -47,3 +47,4 @@ class UploadFormTest(TestCase):
         form = UploadForm(data={'title': title}, files={'file': file})
 
         self.assertTrue(form.is_valid(), msg='Form does not accept empty title.')
+        

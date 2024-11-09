@@ -202,4 +202,3 @@ class WatchPageTest(TestCase):
         # Delete uploaded video
 
         Video.objects.get(id=id).delete()
-
