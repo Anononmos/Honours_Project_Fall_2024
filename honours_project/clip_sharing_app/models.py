@@ -4,6 +4,7 @@ from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils import timezone
+from django.core.cache import cache
 from datetime import timedelta
 
 # Create your models here.
@@ -11,6 +12,8 @@ from datetime import timedelta
 EXPIRY = 10     # In minutes
 
 def upload_to(instance, filename):
+    """Saves file as {video_id}.{extension}."""
+
     extension = filename.split('.')[-1] 
 
     return f'uploads/{instance.video.id}.{extension}'
@@ -47,8 +50,21 @@ class Video(models.Model):
         help_text='Share count of the video.' 
     )
 
+    def delete(self):
+        """Clears the view count from the cache when the video is deleted."""
+
+        cache.delete(self.id)
+        super(Video, self).delete()
+
+        return
+    
+
     def save(self, *args, **kwargs):
-        
+        """
+        Saves the video object to the database. 
+        Creates 6-character alphanumeric id for the database entry. 
+        Creates an expiration date 10 minutes after upload.
+        """
 
         if not self.id:
             self.id = get_random_string(length=6)
@@ -63,7 +79,7 @@ class Video(models.Model):
 
 
 class VideoInstance(models.Model):
-    """Includes video file and access code."""
+    """Includes video file and video info as separate object."""
 
     video = models.OneToOneField(Video, on_delete=models.CASCADE)
     file = models.FileField(upload_to=upload_to)
