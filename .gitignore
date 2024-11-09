@@ -14,3 +14,6 @@ jsconfig.json
 
 uploads
 tmp
+
+# Test input files
+test_files
