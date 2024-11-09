@@ -1,7 +1,10 @@
-const ERR_COLOUR = '#C4462D'
-const BORDER_COLOUR = '#C2C2C2'
-
+/**
+ * Displays error message as a popup.
+ * @param {string} message 
+ */
 const display_error = message => {
+    const ERR_COLOUR = '#C4462D'
+
     $('video').hide()
     $('.outer').css('border-color', ERR_COLOUR)
     $('.error>span').text(message)
@@ -9,6 +12,38 @@ const display_error = message => {
 }
 
 
+/**
+ * Hides the error popup.
+ */
+const hide_error = () => {
+    const BORDER_COLOUR = '#C2C2C2'
+
+    $('video').show()
+    $('.outer').css('border-color', BORDER_COLOUR)
+    $('.error').hide()
+}
+
+
+/**
+ * Gets the HTML media url from the DOM and removes the data attribute.
+ * @returns {string} Extracted media url and removes the url attribute from the HTML DOM and the data cache.
+ */
+const extract_media_url = () => {
+    const url = $('#client').data('url')
+
+    $('#client').removeAttr('data-url')
+    $('#client').removeData('url')
+
+    return url
+}
+
+
+/**
+ * Requests video file contents from a media url. Converts file contents to blob.
+ * @param {string} url 
+ * @returns {Blob | undefined} Converts file contents into blob. Returns nothing if error is thrown.
+ * @throws Error if HTTP request to media url fails.
+ */
 const fetch_video = async url => {
     try {
         const response = await fetch(url)
@@ -35,11 +70,9 @@ $(document).ready( async () => {
     // Fetch the file to convert into a blob url
     // Load the blob url
 
-    $('.error').hide()
+    hide_error()
 
-    const url = $('#client').data('url')
-    $('#client').removeAttr('data-url')
-
+    const url = extract_media_url()
     const blob = await fetch_video(url)
 
     try {
@@ -55,9 +88,7 @@ $(document).ready( async () => {
 } )
 
 $('video').on('loadedmetadata', event => {
-    $('.error').hide()
-    $('.outer').css('border-color', BORDER_COLOUR)
-    $('video').show()
+    hide_error()
 
     URL.revokeObjectURL( $('video').attr('src') )
 })

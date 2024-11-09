@@ -6,6 +6,18 @@ import subprocess as sh
 FILE_SIZE = 50  # In MB
 DURATION = 60   # In seconds
 
+
+def extract_id(url: str) -> str:
+    """Extracts the v parameter (video id) from "/watch?v={video_id}"."""
+
+    if not url.startswith('/watch?v='):
+        return ''
+    
+    id = url.split('v=')[1]
+
+    return id
+
+
 def validate_size(file) -> bool:
     """Validates if the filesize is at most 50MB."""
 
@@ -32,7 +44,7 @@ def validate_duration(file) -> bool:
     # Upload saved to /tmp
     # Duration got through ffprobe via a new process created by subprocess.run
 
-    folder: str = '../tmp/'
+    folder: str = 'tmp/'
     command: list[str] = 'ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1'.split(' ')
 
     fs = FileSystemStorage(location=folder)
@@ -47,7 +59,15 @@ def validate_duration(file) -> bool:
 
         raise Exception(result.stderr)
 
-    duration: int = int( float( result.stdout.decode('utf-8') ) )
-    fs.delete(filename)
+    # Testing on nonsense files generated using fsutil gives no error but the stdout is not convertable to an integer.
+    # Error is thrown and caught in this case
+    # Deletes temporary storage of file regardless of 
+
+    try:
+        duration: int = int( float( result.stdout.decode('utf-8') ) )
+    except:
+        raise Exception(result.stdout.decode('utf-8'))
+    finally:
+        fs.delete(filename)
 
     return duration <= DURATION

@@ -38,14 +38,14 @@ def index(request):
             # Size must be at most 50MB
 
             if not validate_size(file):
-                context['message'] = f'The file uploaded ({filename}) is over {FILE_SIZE} MB in size.'
+                error['message'] = f'The file uploaded ({filename}) is over {FILE_SIZE} MB in size.'
 
                 return render(request, 'error.html', context=error, status=400)
             
             # Type must be video
             
             if not validate_type(file):
-                context['message'] = f'The file uploaded ({filename}) is not a video file.'
+                error['message'] = f'The file uploaded ({filename}) is not a video file.'
 
                 return render(request, 'error.html', context=error, status=400)
 
@@ -53,7 +53,7 @@ def index(request):
 
             try:
                 if not validate_duration(file):
-                    context['message'] = f'The file uploaded ({filename}) is over {DURATION} seconds in duration.'
+                    error['message'] = f'The file uploaded ({filename}) is over {DURATION} seconds in duration.'
 
                     return render(request, 'error.html', context=error, status=400)
 
@@ -62,9 +62,7 @@ def index(request):
             except Exception as err:
                 print(err)
 
-                context = {
-                    'message': f'The file uploaded ({filename}) cannot have its duration accessed.'
-                }
+                error['message'] = f'The file uploaded ({filename}) cannot have its duration accessed.'
 
                 return render(request, 'error.html', context=error, status=400)
 
@@ -77,6 +75,11 @@ def index(request):
             instance.save()
     
             return HttpResponseRedirect(f'/watch?v={video.id}')
+        
+        else:
+            error['message'] = form.errors.as_text()
+
+            return render(request, 'error.html', context=error, status=400)
 
     else:    
         error['message'] = 'Bad request method.'

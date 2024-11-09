@@ -48,6 +48,8 @@ class Video(models.Model):
     )
 
     def save(self, *args, **kwargs):
+        
+
         if not self.id:
             self.id = get_random_string(length=6)
 
