@@ -6,10 +6,20 @@ from django.utils.crypto import get_random_string
 from django.utils import timezone
 from django.core.cache import cache
 from datetime import timedelta
+from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 # Create your models here.
 
-EXPIRY = 10     # In minutes
+# Get the expiration time
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
+load_dotenv(env_path)
+
+EXPIRY = os.environ.get('EXPIRY')     # In minutes
 
 def upload_to(instance, filename):
     """Saves file as {video_id}.{extension}."""
@@ -121,6 +131,15 @@ class VideoInstance(models.Model):
     
 
 # File delete functions
+
+async def delete_expired():
+    """Deletes expired videos. Meant to be executed daily."""
+
+    expired_videos = Video.objects.filter(expires__lte=timezone.now())
+    
+    async for video in expired_videos:
+        video.delete()
+
 
 def _delete_file(path):
     """Deletes file from filesystem"""

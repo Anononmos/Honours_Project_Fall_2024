@@ -8,8 +8,6 @@ from .scripts import *
 
 # Create your views here.
 
-# TODO: have form class rendered on screen using individual fields
-
 def index(request):
     """Homepage view function."""
 
