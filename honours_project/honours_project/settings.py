@@ -29,6 +29,7 @@ load_dotenv(env_path)
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-nbuqd6&$joy19w!de#(y3@^&!4%buiiqt3e7g&l41y2-zy#o5s')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Resolves to True if .env variable is not set to False
 # DEBUG = True
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # Comment this line to enable unit testing. Otherwise will get Winerror[5] Permission denied
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -94,6 +96,20 @@ DATABASES = {
     }
 }
 
+# Static file serving.
+# https://whitenoise.readthedocs.io/en/stable/django.html#add-compression-and-caching-support
+# Comment out the STORAGES block to run unit tests unless you will get a django error or a WinError[5] Permission denied error.
+
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage'
+    }, 
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
@@ -129,7 +145,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = '/'
+STATIC_ROOT = BASE_DIR / 'clip_sharing_app/static'
 
 MEDIA_ROOT = ''
 MEDIA_URL = ''
