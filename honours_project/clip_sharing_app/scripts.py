@@ -9,8 +9,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
 load_dotenv(env_path)
 
-FILE_SIZE = os.environ.get('SIZE_LIMIT')  # In MB
-DURATION = os.environ.get('TIME_LIMIT')   # In seconds
+FILE_SIZE = int( os.environ.get('SIZE_LIMIT') )  # In MB
+DURATION = int( os.environ.get('TIME_LIMIT') )   # In seconds
 
 
 def extract_id(url: str) -> str:

@@ -46,14 +46,19 @@ class UploadPageTest(TestCase):
         with open(self.webm, mode="rb") as file:
             res = self.client.post('/', {'file': file, 'title': ''})
 
+        try:
             self.assertEqual(res.status_code, 302)
             self.assertTrue(res.url.startswith('/watch'))
 
-        # Delete uploaded file
-        # Get param that comes after "v="
+        except Exception as err:
+            raise err
 
-        video_id = extract_id(res.url)    
-        Video.objects.get(id=video_id).delete()
+        finally:
+            # Delete uploaded file
+            # Get param that comes after "v="
+
+            video_id = extract_id(res.url)    
+            Video.objects.get(id=video_id).delete()
 
 
     def test_mp4_upload(self):
@@ -62,14 +67,19 @@ class UploadPageTest(TestCase):
         with open(self.mp4, mode="rb") as file:
             res = self.client.post('/', {'file': file, 'title': ''})
 
+        try:
             self.assertEqual(res.status_code, 302)
             self.assertTrue(res.url.startswith('/watch'))
 
-        # Delete uploaded file
-        # Get param that comes after "v="
+        except Exception as err:
+            raise err
+        
+        finally:
+            # Delete uploaded file
+            # Get param that comes after "v="
 
-        video_id = extract_id(res.url)    
-        Video.objects.get(id=video_id).delete()
+            video_id = extract_id(res.url)    
+            Video.objects.get(id=video_id).delete()
 
 
     def test_no_file(self):
@@ -180,12 +190,17 @@ class WatchPageTest(TestCase):
         id = self.expired_id
         res = self.client.get(f'/watch?v={id}')
 
-        self.assertEqual(res.status_code, 403, msg=f'Requesting the expired endpoint "/watch?v={id}" responded with status code {res.status_code}.')
-        self.assertTemplateUsed(res, 'error.html')
+        try:
+            self.assertEqual(res.status_code, 403, msg=f'Requesting the expired endpoint "/watch?v={id}" responded with status code {res.status_code}.')
+            self.assertTemplateUsed(res, 'error.html')
 
-        # Delete uploaded video
+        except Exception as err:
+            raise err
+        
+        finally:
+            # Delete uploaded video
 
-        Video.objects.get(id=id).delete()
+            Video.objects.get(id=id).delete()
 
 
     def test_valid_video_id(self):
@@ -194,11 +209,29 @@ class WatchPageTest(TestCase):
         id = self.id
         res = self.client.get(f'/watch?v={id}')
 
-        print('exexuted')
-
         self.assertEqual(res.status_code, 200, msg=f'Requesting "/watch?v={id}" with a valid value for v, responded with status code {res.status_code}.')
         self.assertTemplateUsed(res, 'watch.html')
 
-        # Delete uploaded video
 
-        Video.objects.get(id=id).delete()
+    def test_view_count_updates(self):
+        """Tests if the view count updates when a video is visited."""
+
+        # video page is loaded, middleware is then executed which updates viewcount by 1
+        
+        id = self.id
+        old_viewcount: int = Video.objects.get(id=id).views
+
+        self.client.get(f'/watch?v={id}')
+
+        new_viewcount: int = Video.objects.get(id=id).views
+
+        try:
+            self.assertGreater(new_viewcount, old_viewcount, msg=f'View count is not incremented when "/watch?v={id}" is visited.')
+
+        except Exception as err:
+            raise err
+        
+        finally:
+            # Delete uploaded video
+
+            Video.objects.get(id=id).delete()

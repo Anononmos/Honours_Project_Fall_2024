@@ -19,7 +19,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
 load_dotenv(env_path)
 
-EXPIRY = os.environ.get('EXPIRY')     # In minutes
+EXPIRY = int( os.environ.get('EXPIRY') )    # In minutes
 
 def upload_to(instance, filename):
     """Saves file as {video_id}.{extension}."""
@@ -64,10 +64,8 @@ class Video(models.Model):
         """Clears the view count from the cache when the video is deleted."""
 
         cache.delete(self.id)
-        super(Video, self).delete()
+        return super(Video, self).delete()
 
-        return
-    
 
     def save(self, *args, **kwargs):
         """
@@ -83,6 +81,7 @@ class Video(models.Model):
             self.expires = timezone.now() + timedelta(minutes=EXPIRY)
 
         return super(Video, self).save(*args, **kwargs)
+
 
     def __str__(self) -> str:
         return f'id: {self.id}, title: {self.title}'

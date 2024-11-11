@@ -67,10 +67,10 @@ def index(request):
             # Create objects for saving in the database
 
             video = Video.objects.create(title=title)
-            video.save()
+            # video.save()
 
             instance = VideoInstance.objects.create(video=video, file=file)
-            instance.save()
+            # instance.save()
     
             return HttpResponseRedirect(f'/watch?v={video.id}')
         
@@ -118,7 +118,7 @@ def watch(request):
     context = {
         'title': video.title, 
         'uploaded': video.uploaded, 
-        'views': video.views, 
+        'views': video.views + 1, 
         'url': instance.file.url
     }
 

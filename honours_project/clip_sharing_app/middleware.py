@@ -1,4 +1,5 @@
 from django.core.cache import cache
+from django.utils import timezone
 from .models import Video
 
 class VideoViewMiddleware:
@@ -24,6 +25,11 @@ class VideoViewMiddleware:
             except Video.DoesNotExist:
                 return response 
             
+            # If the video is expired
+
+            if timezone.now() > video.expires:
+                return response
+            
             views = cache.get(video_id, None)
 
             # If video id is not in cache, add to cache from database
@@ -38,4 +44,4 @@ class VideoViewMiddleware:
             video.views = views
             video.save()
 
-        return response      
+        return response 
