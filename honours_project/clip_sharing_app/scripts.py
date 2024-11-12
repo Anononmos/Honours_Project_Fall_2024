@@ -50,7 +50,7 @@ def validate_duration(file) -> bool:
     # Upload saved to /tmp
     # Duration got through ffprobe via a new process created by subprocess.run
 
-    folder: str = 'tmp/'
+    folder: str = BASE_DIR / 'tmp/'
     command: list[str] = 'ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1'.split(' ')
 
     fs = FileSystemStorage(location=folder)
