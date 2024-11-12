@@ -21,9 +21,8 @@ from django.conf.urls.static import static
 from clip_sharing_app import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls), 
     path('', views.index, name='index'), 
     path('watch', views.watch, name='watch'),
     path('watch/', views.watch, name='watch'), 
-    # path('viewcount', views.viewCount, name='viewCount'),  
+    path('admin/', admin.site.urls), 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
