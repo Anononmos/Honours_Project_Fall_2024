@@ -25,6 +25,8 @@ class VideoModelTest(TestCase):
         Test if the video object's expiry date is initialized to 10 minutes after its upload date.
         """
 
+        # TODO: On pythonanywhere, this fails because datetime.timedelta cannot be rounded.
+
         video: Video = Video.objects.get(id=self.id)
         ten_minutes = timedelta(minutes=EXPIRY)
         difference = video.expires - video.uploaded

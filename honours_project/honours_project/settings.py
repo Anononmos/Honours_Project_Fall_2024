@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',   # Comment this line to enable unit testing. Otherwise will get Winerror[5] Permission denied
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',   # Comment this line to enable unit testing. Otherwise will get Winerror[5] Permission denied
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -108,14 +108,14 @@ DATABASES = {
 # https://whitenoise.readthedocs.io/en/stable/django.html#add-compression-and-caching-support
 # Comment out the STORAGES block to run unit tests unless you will get a django error or a WinError[5] Permission denied error.
 
-STORAGES = {
-    'default': {
-        'BACKEND': 'django.core.files.storage.FileSystemStorage'
-    }, 
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
+# STORAGES = {
+#     'default': {
+#         'BACKEND': 'django.core.files.storage.FileSystemStorage'
+#     }, 
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 
 # Password validation
@@ -155,8 +155,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'clip_sharing_app/static'
 
-MEDIA_ROOT = ''
-MEDIA_URL = ''
+
+MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_URL = 'uploads/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
