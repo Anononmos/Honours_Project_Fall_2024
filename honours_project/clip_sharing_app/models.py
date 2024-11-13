@@ -132,12 +132,12 @@ class VideoInstance(models.Model):
 
 # File delete functions
 
-async def delete_expired():
+def delete_expired():
     """Deletes expired videos. Meant to be executed daily."""
 
     expired_videos = Video.objects.filter(expires__lte=timezone.now())
     
-    async for video in expired_videos:
+    for video in expired_videos:
         video.delete()
 
 
