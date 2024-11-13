@@ -108,14 +108,14 @@ DATABASES = {
 # https://whitenoise.readthedocs.io/en/stable/django.html#add-compression-and-caching-support
 # Comment out the STORAGES block to run unit tests unless you will get a django error or a WinError[5] Permission denied error.
 
-# STORAGES = {
-#     'default': {
-#         'BACKEND': 'django.core.files.storage.FileSystemStorage'
-#     }, 
-#     "staticfiles": {
-#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-#     },
-# }
+STORAGES = {
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage'
+    }, 
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 
 # Password validation
@@ -156,7 +156,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'clip_sharing_app/static'
 
 
-MEDIA_ROOT = BASE_DIR / 'uploads/'
+MEDIA_ROOT = BASE_DIR
 MEDIA_URL = ''
 
 # Default primary key field type
