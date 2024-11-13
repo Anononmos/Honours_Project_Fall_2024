@@ -1,8 +1,7 @@
 from django.http import HttpResponseRedirect  
 from django.shortcuts import render
 from django.utils import timezone
-from django.core import cache
-from django.core.files import File
+from django.core import cache, files
 from .models import Video, VideoInstance
 from .forms import UploadForm
 from .scripts import *
@@ -71,7 +70,7 @@ def index(request):
             video.save()
 
             instance = VideoInstance.objects.create(video=video)
-            instance.file = File(file, file.name)
+            instance.file = files.File(file, file.name)
             instance.save()
     
             return HttpResponseRedirect(f'/watch?v={video.id}')
