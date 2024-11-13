@@ -14,9 +14,9 @@ import os
 
 # Get the expiration time
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 
-env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
+env_path = load_dotenv(os.path.join(BASE_DIR.parent, '.env'))
 load_dotenv(env_path)
 
 EXPIRY = int( os.environ.get('EXPIRY') )    # In minutes
@@ -26,7 +26,7 @@ def upload_to(instance, filename):
 
     extension = filename.split('.')[-1] 
 
-    return f'uploads/{instance.video.id}.{extension}'
+    return BASE_DIR / f'uploads/{instance.video.id}.{extension}'
 
 
 class Video(models.Model):
