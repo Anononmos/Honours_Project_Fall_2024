@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',   # Comment this line to enable unit testing. Otherwise will get Winerror[5] Permission denied
+    'whitenoise.middleware.WhiteNoiseMiddleware',   # Comment this line to enable unit testing. Otherwise will get Winerror[5] Permission denied
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
