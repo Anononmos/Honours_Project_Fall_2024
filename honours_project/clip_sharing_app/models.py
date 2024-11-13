@@ -26,7 +26,7 @@ def upload_to(instance, filename):
 
     extension = filename.split('.')[-1] 
 
-    return BASE_DIR / f'uploads/{instance.video.id}.{extension}'
+    return f'uploads/{instance.video.id}.{extension}'
 
 
 class Video(models.Model):
