@@ -157,7 +157,7 @@ STATIC_ROOT = BASE_DIR / 'clip_sharing_app/static'
 
 
 MEDIA_ROOT = BASE_DIR
-MEDIA_URL = 'uploads/'
+MEDIA_URL = ''
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
