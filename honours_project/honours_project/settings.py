@@ -156,7 +156,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'clip_sharing_app/static'
 
 
-MEDIA_ROOT = ''
+MEDIA_ROOT = BASE_DIR / 'uploads/'
 MEDIA_URL = ''
 
 # Default primary key field type
