@@ -1,5 +1,5 @@
 from django.core.files.storage import FileSystemStorage
-from django.core.files.base import ContentFile
+from django.core.files import File
 from dotenv import load_dotenv
 from pathlib import Path
 import subprocess as sh
@@ -47,9 +47,7 @@ def validate_duration(file) -> bool:
     Creates a new process using the subprocess.run method which runs ffprobe 
     """
 
-    # Copy the file and upload it to temp directory.
-
-    copy = ContentFile(file.read())
+    # Create copy of UploadedFile object
 
     # Created temporary file to run duration check on
     # Upload saved to /tmp
@@ -60,7 +58,7 @@ def validate_duration(file) -> bool:
 
     fs = FileSystemStorage(location=folder)
 
-    filename: str = fs.save(file.name, copy)
+    filename: str = fs.save(file.name, file)
     result = sh.run(command + [ f'{folder}{filename}' ], stdout=sh.PIPE, stderr=sh.STDOUT)
 
     # Check if there is an error

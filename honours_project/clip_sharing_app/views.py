@@ -69,7 +69,8 @@ def index(request):
             video = Video.objects.create(title=title)
             video.save()
 
-            instance = VideoInstance.objects.create(file=file, video=video)
+            instance = VideoInstance.objects.create(video=video)
+            instance.file = File(file, file.name)
             instance.save()
     
             return HttpResponseRedirect(f'/watch?v={video.id}')
