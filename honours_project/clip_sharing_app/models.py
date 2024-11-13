@@ -93,6 +93,7 @@ class VideoInstance(models.Model):
     video = models.OneToOneField(Video, on_delete=models.CASCADE)
     file = models.FileField(upload_to=upload_to)
 
+
     def delete(self):
         """Deletes the uploaded file when the instance is deleted."""
 

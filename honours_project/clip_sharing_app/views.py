@@ -2,6 +2,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils import timezone
 from django.core import cache
+from django.core.files import File
 from .models import Video, VideoInstance
 from .forms import UploadForm
 from .scripts import *
