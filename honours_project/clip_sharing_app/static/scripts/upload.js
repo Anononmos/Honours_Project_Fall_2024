@@ -127,8 +127,6 @@ $('input[type="file"]').on('change', async event => {
         }   
         
     } catch (error) {
-        console.log('Error thrown')
-
         display_error(`The upload cannot have its duration accessed.`)
 
         return
