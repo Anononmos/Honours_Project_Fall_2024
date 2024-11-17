@@ -6,3 +6,5 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         delete_expired()
+
+        self.stdout.write('Successfully deleted all expired videos.')
