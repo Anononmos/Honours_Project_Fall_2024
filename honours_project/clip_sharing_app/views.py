@@ -98,7 +98,7 @@ def watch(request):
     if video_id is None:
         error['message'] = f'No video id is provided.'
 
-        return render(request, 'error.html', context=error)
+        return render(request, 'error.html', context=error, status=400)
 
     try:
         video = Video.objects.get(pk=video_id)

@@ -173,6 +173,15 @@ class WatchPageTest(TestCase):
     def setUp(self):
         """Sets up file upload for every test run."""
 
+
+    def test_no_id(self):
+        """Tests if GET requesting "/watch?v=" with the "v" query parameter missing responds with status code 400."""
+
+        res = self.client.get(f'/watch')
+
+        self.assertEqual(res.status_code, 400, msg=f'Requesting "/watch" with no query parameter v, responded with status code {res.status_code}.')
+        self.assertTemplateUsed(res, 'error.html')
+
         
     def test_invalid_video_id(self):
         """Tests if GET requesting "/watch?v=" with a non-existent value for v query parameter responds with status code 404."""
