@@ -22,7 +22,7 @@ import os
 from dotenv import load_dotenv
 
 env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
-load_dotenv(env_path)
+# load_dotenv(env_path)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = 'django-insecure-nbuqd6&$joy19w!de#(y3@^&!4%buiiqt3e7g&l41y2-zy#o5s'

@@ -17,7 +17,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env_path = load_dotenv(os.path.join(BASE_DIR, '.env'))
-load_dotenv(env_path)
+# load_dotenv(env_path)
 
 EXPIRY = int( os.environ.get('EXPIRY') )    # In minutes
 
