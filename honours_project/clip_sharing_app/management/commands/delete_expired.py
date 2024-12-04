@@ -9,13 +9,7 @@ class Command(BaseCommand):
         expired_videos = Video.objects.filter(expires__lte=timezone.now())
 
         for video in expired_videos:
-            self.stdout(f'Deleted Video:
-                            id: {video.id}, 
-                            title: {video.title}, 
-                            uplaoded: {video.uploaded}, 
-                            expires: {video.expires}, 
-                            time: {timezone.now()}\n'
-                        )
+            self.stdout(f'Deleted Video:\n\tid: {video.id},\ttitle: {video.title},\tuplaoded: {video.uploaded},\texpires: {video.expires},\ttime: {timezone.now()}\n')
             
             video.delete()
 
