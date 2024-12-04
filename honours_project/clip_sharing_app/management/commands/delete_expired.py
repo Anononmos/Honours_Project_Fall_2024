@@ -20,4 +20,4 @@ class Command(BaseCommand):
             
             video.delete()
 
-        self.stdout('Successfully deleted all expired videos.')
+        self.stdout.write('Successfully deleted all expired videos.')
