@@ -64,3 +64,7 @@ Run the following commmand:
 ## To Delete Expired Entries on the Database:
 
 ```python manage.py delete_expired```
+
+## To Access the Administrator Site and the PythonAnywhere Account
+
+The login information is included in the Honours_Admin.txt file in the Design-documents folder.
