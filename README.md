@@ -7,7 +7,7 @@ Supervisor:     Prof. Darryl Hill
 
 ## Outline
 
-This project is accessible on the website http://ainan.pythonanywhere.com. There, you can upload and watch the videos you uploaded. To share an uploaded video, copy and paste its URL. The website will expire 
+This project is accessible on the website http://ainan.pythonanywhere.com. There, you can upload and watch short videos. To share an uploaded video, copy and paste its URL. The website will expire in March 2025.
 
 There is also an administrator webpage whose login is accessible through the http://ainan.pythonanywhere.com/admin endpoint. 
 
